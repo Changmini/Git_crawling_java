@@ -50,26 +50,41 @@ public class DataCollectController {
 	
 	@RequestMapping(value = "/test.do")
 	public String callCollectors() {
-		System.out.println("activity");
-
 		String URL = "https://www.airbnb.co.kr/s/homes?refinement_paths%5B%5D=%2Fhomes&date_picker_type=flexible_dates&search_mode=flex_destinations_search&search_type=AUTOSUGGEST";
 		List<WebElement> contents = dc.collect(URL, "div.c8ohbfz.dir.dir-ltr");
 		
+		int cSize = contents.size();
+		String[] hrefArr = new String[cSize];
+		int idx = 0;
 		// 5. 데이터 분석
-		if( contents.size() > 0 ) {
+		if( cSize > 0 ) {
 		    // 에어비앤비 숙박 리스트 가져오기
 		    for(WebElement content : contents ) {
 		        try {
 		        	// 숙박 URL 정보
-		            String href = content.findElement(By.cssSelector("a")).getAttribute("href");
-		            
-		            System.out.println( href );
+		            hrefArr[idx++] = content.findElement(By.cssSelector("a")).getAttribute("href");
 		            
 		        } catch ( NoSuchElementException e ) {
 		            // pass
 		        }
 		    }
 		}
+		
+		for (int i = 0; i < hrefArr.length; i++) {
+			List<WebElement> conts = dc.collect(hrefArr[i], "data url");
+			
+			int cs = conts.size();
+			if (cs > 0) {
+				for(WebElement cont : conts) {
+					try {
+						String here = cont.findElement(By.cssSelector(""));
+					} catch (NoSuchElementException e) {
+						// pass
+					}
+				}
+			}
+		}
+		
 		
 		System.out.println("success");
 		return "test";
@@ -86,7 +101,7 @@ public class DataCollectController {
 	
 	
 
-}
+} // class
 
 
 
