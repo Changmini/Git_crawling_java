@@ -32,7 +32,7 @@ public class InitChromeDriver {
 	public InitChromeDriver() {
 		// 1. WebDriver 경로 설정
         // Path path = Paths.get(System.getProperty("user.dir"), "src/main/resources/chromedriver.exe");
-        Path path = Paths.get("C:/Users/ChangMin/eGov_mutatio/DataCollector/", "src/main/resources/chromedriver.exe");
+        Path path = Paths.get("C:/Users/ChangMin/Git/Git_crawling_java/DataCollector/", "src/main/resources/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", path.toString());
         
         // 2. WebDriver 옵션 설정
