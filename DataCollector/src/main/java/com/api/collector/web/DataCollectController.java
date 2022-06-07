@@ -15,6 +15,7 @@
  */
 package com.api.collector.web;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -70,6 +71,8 @@ public class DataCollectController {
 		    }
 		}
 		
+		System.out.println(Arrays.toString(hrefArr));
+		
 		for (int i = 0; i < hrefArr.length; i++) {
 			List<WebElement> conts = dc.collect(hrefArr[i], "data url");
 			
@@ -77,7 +80,7 @@ public class DataCollectController {
 			if (cs > 0) {
 				for(WebElement cont : conts) {
 					try {
-						String here = cont.findElement(By.cssSelector(""));
+						String here = cont.findElement(By.cssSelector("a")).getAttribute("text");
 					} catch (NoSuchElementException e) {
 						// pass
 					}
