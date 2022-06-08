@@ -52,7 +52,7 @@ public class DataCollectController {
 	@RequestMapping(value = "/test.do")
 	public String callCollectors() {
 		String URL = "https://www.airbnb.co.kr/s/homes?refinement_paths%5B%5D=%2Fhomes&date_picker_type=flexible_dates&search_mode=flex_destinations_search&search_type=AUTOSUGGEST";
-		List<WebElement> contents = dc.collect(URL, "div.c8ohbfz.dir.dir-ltr");
+		List<WebElement> contents = dc.collect(URL, "div.c12h3gv8.dir.dir-ltr");
 		
 		int cSize = contents.size();
 		String[] hrefArr = new String[cSize];
