@@ -37,11 +37,12 @@ public class DataCollectController {
 	
 	@RequestMapping(value = "/test.do")
 	public String callCollectors() {
-		String URL = "https://www.airbnb.co.kr/s/homes?refinement_paths%5B%5D=%2Fhomes&date_picker_type=flexible_dates&search_mode=flex_destinations_search&search_type=AUTOSUGGEST";
+		String URL = "set url";
 		List<WebElement> contents = dc.collect(URL, "div.cy5jw6o.dir.dir-ltr"); 
 		
 		int cSize = contents.size();
 		String[] hrefArr = new String[cSize];
+		String[] DesArr = new String[cSize]; 
 		int idx = 0;
 		// 5. 데이터 분석
 		if( cSize > 0 ) {
@@ -50,15 +51,15 @@ public class DataCollectController {
 		        try {
 		        	// 숙박 URL 정보 
 		        	// content의 HTML을 확인할 때, content.getAttribute("innerHTML"));
-		            hrefArr[idx++] = content.findElement(By.cssSelector("a")).getAttribute("href");
+		            hrefArr[idx] = content.findElement(By.cssSelector("a")).getAttribute("href");
+		            DesArr[idx++] = content.findElement(By.cssSelector("div:nth-child(2)")).getAttribute("innerHTML");
 		        } catch ( NoSuchElementException e ) {
-		        	System.out.println("Search Main Page");
+		        	System.out.println("/test.do crawling error");
 		        	e.printStackTrace();
 		        }
 		    }
 		}
-		
-		System.out.println(Arrays.toString(hrefArr));
+		System.out.println(Arrays.toString(DesArr));
 		/*
 		for (int i = 0; i < hrefArr.length; i++) {
 			List<WebElement> conts = dc.collect(hrefArr[i], "data url");
@@ -76,9 +77,7 @@ public class DataCollectController {
 		}
 		*/
 		
-		// method에 집어넣자
-		// driver.close(); close를 통해 모든 탭이 종료되었을 때, WebDriver도 닫히게 되는데 표면적으로는 종료된 것처럼 보이지만 Process가 살아있어서 자원의 낭비를 유발함.
-		// driver.quit(); close로 모든 탭을 종료시켰을 때와는 다르게 Process 자체를 종료함.
+		dc.close();
 		System.out.println("success");
 		return "test";
 	}

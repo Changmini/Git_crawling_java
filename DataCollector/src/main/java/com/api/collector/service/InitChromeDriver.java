@@ -50,7 +50,7 @@ public class InitChromeDriver {
 	public void setURL(String URL) { this.setURL(URL, 1000); }
 	public void setURL(String URL, Integer delay) {
 		if(URL == null || URL.equals("") || URL.equals(" ")) { 
-			System.out.println("method: searchHTML error");
+			System.out.println("method setURL: null param");
 			return ;
 		}
 		this.driver.get(URL);
@@ -62,9 +62,15 @@ public class InitChromeDriver {
 	
 	public List<WebElement> getElements(String cssSelector) {
 		if (this.driver == null || cssSelector.equals("") || cssSelector.equals(" ")) { 
-			System.out.println("getElements error");
+			System.out.println("method getElements: null param");
 			return Collections.emptyList();
 		}
 		return this.driver.findElements(By.cssSelector(cssSelector));
 	}
-}
+	// driver.close(); close를 통해 모든 탭이 종료되었을 때, WebDriver도 닫히게 되는데 표면적으로는 종료된 것처럼 보이지만 Process가 살아있어서 자원의 낭비를 유발함.
+	// driver.quit(); close로 모든 탭을 종료시켰을 때와는 다르게 Process 자체를 종료함.
+	public void close() {
+		this.driver.close();
+		this.driver.quit();
+	}
+} // class

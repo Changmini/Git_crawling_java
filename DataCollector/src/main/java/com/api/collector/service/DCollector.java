@@ -13,10 +13,11 @@ public class DCollector {
 	
 	private InitChromeDriver myDriver = null;
 	
-	public DCollector() {
+	public DCollector() { 
 		// 1. 크롬 드라이버 연결
 		this.myDriver = new InitChromeDriver();
 	}
+	
 	/**
 	 * <pre>
 	 * 	URL          = HTML을 분석할 웹 사이트 링크
@@ -33,7 +34,10 @@ public class DCollector {
 		System.out.println( "조회된 콘텐츠 수 : "+elements.size() );
 		// 5. 반환
 		return elements != null ? elements : Collections.emptyList();
-		
 	} // collect
+	
+	public void close() {
+		this.myDriver.close();
+	}
 	
 } // class
