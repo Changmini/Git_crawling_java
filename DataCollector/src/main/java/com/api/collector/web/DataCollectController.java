@@ -37,8 +37,9 @@ public class DataCollectController {
 	
 	@RequestMapping(value = "/test.do")
 	public String callCollectors() {
-		String URL = "set url";
-		List<WebElement> contents = dc.collect(URL, "div.cy5jw6o.dir.dir-ltr"); 
+		String URL = "여기부터 설정해라";
+		List<WebElement> contents = dc.collect(URL, "#site-content > div.f1mkluj0.dir.dir-ltr > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div > div"); 
+
 		
 		int cSize = contents.size();
 		String[] hrefArr = new String[cSize];
@@ -47,10 +48,13 @@ public class DataCollectController {
 		// 5. 데이터 분석
 		if( cSize > 0 ) {
 		    // 에어비앤비 숙박 리스트 가져오기
+			System.out.println("start");
 		    for(WebElement content : contents ) {
 		        try {
+			    	String a = content.getAttribute("innerHTML");
+			    	System.out.println("contents: "+ a);
 		        	// 숙박 URL 정보 
-		        	// content의 HTML을 확인할 때, content.getAttribute("innerHTML"));
+		        	// content의 HTML을 확인할 때, content.getAttribute("innerHTML");
 		            hrefArr[idx] = content.findElement(By.cssSelector("a")).getAttribute("href");
 		            DesArr[idx++] = content.findElement(By.cssSelector("div:nth-child(2)")).getAttribute("innerHTML");
 		        } catch ( NoSuchElementException e ) {

@@ -25,7 +25,6 @@ public class DCollector {
 	 * </pre>
 	 * */
 	public List<WebElement> collect(String URL, String cssSelector) {
-		
 		// 2. 웹 페이지 요청
 		myDriver.setURL(URL);
 		// 3. 초기 HTML 수집 
