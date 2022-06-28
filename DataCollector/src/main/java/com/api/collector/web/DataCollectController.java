@@ -37,7 +37,7 @@ public class DataCollectController {
 	
 	@RequestMapping(value = "/test.do")
 	public String callCollectors() {
-		String URL = "여기부터 설정해라";
+		String URL = "이것부터 설정하고 가자";
 		List<WebElement> contents = dc.collect(URL, "#site-content > div.f1mkluj0.dir.dir-ltr > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div > div"); 
 
 		
@@ -51,35 +51,34 @@ public class DataCollectController {
 			System.out.println("start");
 		    for(WebElement content : contents ) {
 		        try {
-			    	String a = content.getAttribute("innerHTML");
-			    	System.out.println("contents: "+ a);
 		        	// 숙박 URL 정보 
 		        	// content의 HTML을 확인할 때, content.getAttribute("innerHTML");
 		            hrefArr[idx] = content.findElement(By.cssSelector("a")).getAttribute("href");
-		            DesArr[idx++] = content.findElement(By.cssSelector("div:nth-child(2)")).getAttribute("innerHTML");
+		            DesArr[idx++] = content.findElement(By.cssSelector("a + div + div")).getAttribute("innerHTML");
 		        } catch ( NoSuchElementException e ) {
 		        	System.out.println("/test.do crawling error");
 		        	e.printStackTrace();
 		        }
 		    }
 		}
-		System.out.println(Arrays.toString(DesArr));
-		/*
+
+		
 		for (int i = 0; i < hrefArr.length; i++) {
-			List<WebElement> conts = dc.collect(hrefArr[i], "data url");
+			List<WebElement> conts = dc.collect(hrefArr[i], "._88xxct"); // 얘도 클래스말고 태그 계층으로 바꿔서 코딩하자
 			
 			int cs = conts.size();
 			if (cs > 0) {
 				for(WebElement cont : conts) {
 					try {
-						String here = cont.findElement(By.cssSelector("a")).getAttribute("text");
+						System.out.println(cont.getAttribute("innerHTML"));
+//						String here = cont.findElement(By.cssSelector("a")).getAttribute("text");
 					} catch (NoSuchElementException e) {
 						// pass
 					}
 				}
 			}
 		}
-		*/
+		
 		
 		dc.close();
 		System.out.println("success");
