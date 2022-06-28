@@ -64,7 +64,7 @@ public class DataCollectController {
 
 		
 		for (int i = 0; i < hrefArr.length; i++) {
-			List<WebElement> conts = dc.collect(hrefArr[i], "._88xxct"); // 태그 계층으로 바꿔서 코딩하자 (div)
+			List<WebElement> conts = dc.collect(hrefArr[i], "._88xxct"); // 태그 계층으로 바꿔서 코딩하자 (div) commit
 			
 			int cs = conts.size();
 			if (cs > 0) {
